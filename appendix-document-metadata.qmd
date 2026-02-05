@@ -1,0 +1,26 @@
+# Document Generation Metadata {.unnumbered}
+
+::: {.content-visible when-format="docx"}
+This document was generated from git commit information. Use this information when transferring edits from this DOCX file back to the Quarto source files to set up the PR correctly and account for any commits added since this document was generated.
+
+**To enable automatic git metadata:**
+
+1. Install R with the `knitr` and `rmarkdown` packages
+2. Add an R code chunk to this file that retrieves git information using `system()` calls
+3. See the [UCD-SERG lab-manual appendix-document-metadata.qmd](https://github.com/UCD-SERG/lab-manual/blob/main/appendix-document-metadata.qmd) for an example implementation
+
+**Manual git information:**
+
+You can manually add git commit information here when generating DOCX files:
+
+- **Branch:** [branch name]
+- **Commit:** [short hash]
+- **Full commit hash:** [full hash]
+- **Commit date:** [date]
+:::
+
+
+
+
+
+

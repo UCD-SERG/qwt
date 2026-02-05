@@ -5,6 +5,7 @@ project:
     - "*.qmd"
     - "chapters/*.qmd"
     - "!README.md"
+    - "!appendix-document-metadata.qmd"
 
 website:
   title: "Quarto Website Template"
@@ -53,6 +54,18 @@ format:
     df-print: paged
     date: last-modified
     date-format: "[Last modified:] YYYY-MM-DD HH:mm:ss (z)"
+  docx:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    number-depth: 3
+    df-print: tibble
+    prefer-html: true
+
+# Note: RevealJS and PDF formats are available via separate profiles
+# to avoid rendering conflicts in website mode:
+#   quarto render --profile revealjs  # Generates slides in _slides/
+#   quarto render --profile handout   # Generates PDFs in _handouts/
 
 execute:
   warning: false

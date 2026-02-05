@@ -50,3 +50,5 @@ This is a warning callout. Alert readers to potential issues.
 ::: {.callout-important}
 This is an important callout. Emphasize critical information.
 :::
+
+{{< include ../appendix-document-metadata.qmd >}}
