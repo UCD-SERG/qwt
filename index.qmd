@@ -71,4 +71,9 @@ Your website will be available at `https://YOUR-USERNAME.github.io/YOUR-REPO/`
 
 Add your license information here.
 
+## References {.unnumbered}
+
+::: {#refs}
+:::
+
 {{< include appendix-document-metadata.qmd >}}

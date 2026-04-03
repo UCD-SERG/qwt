@@ -1,2 +1,4 @@
-# Empty .Rprofile
-# R packages managed by CI environment
+if (interactive()) {
+  require(usethis)
+  require(devtools)
+}

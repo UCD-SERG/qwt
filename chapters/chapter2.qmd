@@ -63,4 +63,9 @@ This is a warning callout. Alert readers to potential issues.
 This is an important callout. Emphasize critical information.
 :::
 
+## References {.unnumbered}
+
+::: {#refs}
+:::
+
 {{< include ../appendix-document-metadata.qmd >}}

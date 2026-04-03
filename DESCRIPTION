@@ -16,5 +16,7 @@ Depends:
 Suggests:
     knitr,
     rmarkdown,
-    spelling
+    spelling,
+    usethis,
+    devtools
 VignetteBuilder: knitr

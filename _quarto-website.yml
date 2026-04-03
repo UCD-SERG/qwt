@@ -6,6 +6,7 @@ project:
     - "chapters/*.qmd"
     - "!README.md"
     - "!appendix-document-metadata.qmd"
+    - "!references.qmd"
 
 website:
   title: "Quarto Website Template"
@@ -28,8 +29,6 @@ website:
             href: chapters/chapter1.qmd
           - text: "Chapter 2: Advanced Topics"
             href: chapters/chapter2.qmd
-      - text: "References"
-        href: references.qmd
 
 format:
   html:

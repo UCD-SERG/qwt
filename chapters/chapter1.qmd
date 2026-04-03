@@ -54,4 +54,9 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 Include citations using `@citationkey` format, which references entries in your `references.bib` file.
 
+## References {.unnumbered}
+
+::: {#refs}
+:::
+
 {{< include ../appendix-document-metadata.qmd >}}
