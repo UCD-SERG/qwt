@@ -57,7 +57,7 @@ Include citations using `@citationkey` format, which references entries in your 
 I'm adding some new content here:
 
 ```{r}
-1+1
+1 + 1
 ```
 
 
