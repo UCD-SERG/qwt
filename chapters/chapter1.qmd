@@ -66,4 +66,3 @@ I'm adding some new content here:
 ::: {#refs}
 :::
 
-{{< include ../appendix-document-metadata.qmd >}}

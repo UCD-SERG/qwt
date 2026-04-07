@@ -76,4 +76,3 @@ Add your license information here.
 ::: {#refs}
 :::
 
-{{< include appendix-document-metadata.qmd >}}
