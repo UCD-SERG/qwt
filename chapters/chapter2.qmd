@@ -68,4 +68,3 @@ This is an important callout. Emphasize critical information.
 ::: {#refs}
 :::
 
-{{< include ../appendix-document-metadata.qmd >}}

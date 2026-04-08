@@ -57,21 +57,9 @@ def add_page_banner(html_path, html_dir, changed_pages):
             
             # Calculate relative link from current page to changed page
             try:
-                # Get relative path from current HTML to changed HTML
                 current_dir = html_path.parent
                 link_path = os.path.relpath(page_html_path, current_dir)
-                
-                # Get tracked changes DOCX path
-                tracked_docx_name = f"{page_info['stem']}-tracked-changes.docx"
-                tracked_docx_path = page_html_path.parent / tracked_docx_name
-                
-                if tracked_docx_path.exists():
-                    # Make tracked DOCX link relative to current page
-                    tracked_docx_link = os.path.relpath(tracked_docx_path, current_dir)
-                    page_links.append(
-                        f'<a href="{link_path}">{page_info["title"]}</a> '
-                        f'(<a href="{tracked_docx_link}" download>tracked changes</a>)'
-                    )
+                page_links.append(f'<a href="{link_path}">{page_info["title"]}</a>')
             except Exception as e:
                 print(f"  Warning: Could not create link to {page_rel_path}: {e}", file=sys.stderr)
         

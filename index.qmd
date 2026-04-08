@@ -1,5 +1,7 @@
 ---
 title: "Quarto Website Template"
+date: last-modified
+date-format: "[Last modified:] YYYY-MM-DD HH:mm:ss (z)"
 format:
   html: default
   revealjs:
@@ -76,4 +78,3 @@ Add your license information here.
 ::: {#refs}
 :::
 
-{{< include appendix-document-metadata.qmd >}}

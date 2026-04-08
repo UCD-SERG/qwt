@@ -7,6 +7,7 @@ This compares the PR's DOCX files with the published versions from gh-pages.
 import os
 import sys
 import subprocess
+import shutil
 from pathlib import Path
 
 def checkout_base_docx(base_ref='origin/gh-pages', target_dir='/tmp/base-docx'):
@@ -173,12 +174,16 @@ def process_docx_file(new_docx_path, base_docx_dir, docx_dir):
     """Process a single DOCX file: fetch old version, compare, and create tracked changes version."""
     print(f"Processing {new_docx_path}...")
     
+    new_path = Path(new_docx_path)
+    output_path = new_path.parent / f"{new_path.stem}-tracked-changes.docx"
+    
     if not base_docx_dir:
         print("  No base DOCX directory available")
+        print("  (New page - creating tracked changes DOCX with all content marked as new)")
+        shutil.copy2(new_path, output_path)
+        print(f"  ✓ Copied DOCX as tracked changes: {output_path}")
         return
     
-    # Get the relative path from the docx_dir
-    new_path = Path(new_docx_path)
     docx_dir_path = Path(docx_dir)
     
     try:
@@ -192,11 +197,10 @@ def process_docx_file(new_docx_path, base_docx_dir, docx_dir):
     
     if not base_path.exists():
         print(f"  Base DOCX not found: {base_path}")
-        print(f"  (This is normal for new pages)")
+        print(f"  (New page - creating tracked changes DOCX with all content marked as new)")
+        shutil.copy2(new_path, output_path)
+        print(f"  ✓ Copied DOCX as tracked changes: {output_path}")
         return
-    
-    # Create output path with tracked changes in the same directory structure
-    output_path = new_path.parent / f"{new_path.stem}-tracked-changes.docx"
     
     print(f"  Output will be: {output_path}")
     
