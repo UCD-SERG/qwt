@@ -6,6 +6,7 @@ This compares the PR's rendered files with the published versions from gh-pages.
 
 import os
 import sys
+import json
 import subprocess
 from pathlib import Path
 
@@ -105,39 +106,43 @@ def main():
         print("  3. Network or permissions issue\n")
         
         # Treat all files as changed
-        html_files = list(rendered_dir.glob("*.html"))
-        changed_chapters = [f.stem for f in html_files if f.stem != 'index']
+        html_files = list(rendered_dir.rglob("*.html"))
+        changed_chapters = [
+            str(f.relative_to(rendered_dir).with_suffix(''))
+            for f in html_files
+            if f.stem != 'index' and not f.stem.endswith('-slides')
+        ]
     else:
         print(f"Base files checked out successfully to {base_dir}\n")
         
-        # Find all HTML files in rendered output
-        html_files = list(rendered_dir.glob("*.html"))
+        # Find all HTML files in rendered output recursively
+        html_files = list(rendered_dir.rglob("*.html"))
         
         changed_chapters = []
         for html_file in html_files:
-            # Skip index.html - we'll handle that separately
-            if html_file.stem == 'index':
+            # Skip index.html and slides files
+            if html_file.stem == 'index' or html_file.stem.endswith('-slides'):
                 continue
             
-            # Check if HTML changed
-            base_html = base_dir / f"docs/{html_file.name}"
-            if not base_html.exists():
-                base_html = base_dir / html_file.name
+            # Get relative path from rendered_dir
+            rel_path = html_file.relative_to(rendered_dir)
+            
+            # Check if HTML changed (base uses same relative path)
+            base_html = base_dir / rel_path
             
             html_changed = files_differ(html_file, base_html)
             
             # Check if corresponding DOCX changed
             docx_file = html_file.with_suffix('.docx')
-            base_docx = base_dir / f"docs/{docx_file.name}"
-            if not base_docx.exists():
-                base_docx = base_dir / docx_file.name
+            base_docx = base_dir / rel_path.with_suffix('.docx')
             
             docx_changed = docx_file.exists() and files_differ(docx_file, base_docx)
             
             # If either changed, mark this chapter as changed
             if html_changed or docx_changed:
-                changed_chapters.append(html_file.stem)
-                print(f"  Changed: {html_file.stem} (HTML: {html_changed}, DOCX: {docx_changed})")
+                chapter_id = str(rel_path.with_suffix(''))
+                changed_chapters.append(chapter_id)
+                print(f"  Changed: {chapter_id} (HTML: {html_changed}, DOCX: {docx_changed})")
     
     if not changed_chapters:
         print("No chapters changed")
@@ -148,8 +153,8 @@ def main():
                 f.write("PREVIEW_SHOW_HIGHLIGHTS=false\n")
         
         # Still create the JSON file for home banner
-        import json
-        with open('./_site/changed-chapters.json', 'w') as f:
+        json_path = rendered_dir / 'changed-chapters.json'
+        with open(json_path, 'w') as f:
             json.dump({
                 'changed_chapters': [],
                 'count': 0
@@ -175,8 +180,8 @@ def main():
                 f.write("PREVIEW_SHOW_HIGHLIGHTS=true\n")
     
     # Also create a JSON file for easy access
-    import json
-    with open('./_site/changed-chapters.json', 'w') as f:
+    json_path = rendered_dir / 'changed-chapters.json'
+    with open(json_path, 'w') as f:
         json.dump({
             'changed_chapters': changed_chapters,
             'count': len(changed_chapters)
