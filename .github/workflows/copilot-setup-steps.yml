@@ -105,14 +105,16 @@ jobs:
           gh auth setup-git
           echo "GH_TOKEN=$MACROS_REPO_PAT" >> "$GITHUB_ENV"
 
-      - name: Verify macros repository push access
+      - name: Verify macros repository write access
         env:
           MACROS_REPO_PAT: ${{ secrets.MACROS_REPO_PAT }}
         run: |
           if [ -z "${MACROS_REPO_PAT:-}" ]; then
-            echo "MACROS_REPO_PAT is not set; skipping macros push check."
+            echo "MACROS_REPO_PAT is not set; skipping macros write check."
             exit 0
           fi
-          git push --dry-run https://github.com/d-morrison/macros.git \
-            HEAD:refs/heads/copilot-macros-auth-check > /dev/null
-          echo "Verified: PAT can perform a push to d-morrison/macros."
+          if [ "$(gh api repos/d-morrison/macros --jq '.permissions.push')" != "true" ]; then
+            echo "MACROS_REPO_PAT does not have push permission on d-morrison/macros."
+            exit 1
+          fi
+          echo "Verified: PAT has push permission on d-morrison/macros."
