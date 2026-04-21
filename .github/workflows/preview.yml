@@ -43,8 +43,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: _freeze
-          key: ${{ runner.os }}-quarto-freezer-${{ github.event.pull_request.head.sha }}
+          key: ${{ runner.os }}-quarto-freezer-${{ github.event.pull_request.head.sha }}-${{ github.run_attempt }}
           restore-keys: |
+            ${{ runner.os }}-quarto-freezer-${{ github.event.pull_request.head.sha }}-
             ${{ runner.os }}-quarto-freezer-main-
             ${{ runner.os }}-quarto-freezer-
 
@@ -94,11 +95,10 @@ jobs:
           PREVIEW_CHANGED_CHAPTERS: ${{ env.PREVIEW_CHANGED_CHAPTERS }}
 
       - name: Save Quarto freezer
-        if: steps.quarto-freezer-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: _freeze
-          key: ${{ runner.os }}-quarto-freezer-${{ github.event.pull_request.head.sha }}
+          key: ${{ runner.os }}-quarto-freezer-${{ github.event.pull_request.head.sha }}-${{ github.run_attempt }}
 
       - name: Deploy PR Preview
         id: preview-step
