@@ -15,8 +15,8 @@ format:
     df-print: paged
     number-depth: 2
     slide-number: true
-    shift-heading-level-by: -1
-    slide-level: 2
+    shift-heading-level-by: 0
+    slide-level: 1
     scrollable: true
     echo: true
     margin: 0.0
