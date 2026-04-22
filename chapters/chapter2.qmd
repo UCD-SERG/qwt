@@ -68,7 +68,7 @@ This is a sample lemma-style div using the variant class name `lemma-proof`.
 :::
 
 ::: {#cor-sample .corollary}
-This is a sample corollary-style div.
+This is a sample corollary-style div using the standard class name `corollary`.
 :::
 
 # References {.unnumbered}
