@@ -98,9 +98,9 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-873e6e24889f5b84a2497d6c262ef635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-51f9ee0298c270ca7725fa318eed1645.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-873e6e24889f5b84a2497d6c262ef635.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c4af9d5cc9560aba4b75f44438dc8e4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-e0bf5562c0727902ff29b4740d84afe5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c4af9d5cc9560aba4b75f44438dc8e4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -564,10 +564,10 @@ document.addEventListener("DOMContentLoaded", function () {
     equation.classList.add("equation-anchor-target");
 
     const anchor = document.createElement("a");
-    anchor.className = "equation-anchor";
+    anchor.className = "equation-anchor anchorjs-link";
     anchor.href = "#" + id;
     anchor.setAttribute("aria-label", "Permalink to this equation");
-    anchor.textContent = "🔗";
+    anchor.textContent = "";
     equation.appendChild(anchor);
   });
 });
@@ -599,7 +599,6 @@ const theoremLikeClasses = new Set([
   "solution"
 ]);
 const inlineAnchorSeparator = "\u00A0";
-const anchorIcon = "🔗";
 const maxAnchorRetryAttempts = 5;
 const anchorRetryDelayMs = 50;
 
@@ -619,26 +618,6 @@ const addTheoremLikeDivAnchors = () => {
     if (!theoremDiv.dataset.anchorId) {
       theoremDiv.dataset.anchorId = theoremDiv.id;
     }
-  }
-};
-
-const addLevel1SectionAnchors = () => {
-  for (const sectionHeading of window.document.querySelectorAll(
-    "section.level1[id] > h1"
-  )) {
-    if (!sectionHeading.classList.contains("anchored")) {
-      sectionHeading.classList.add("anchored");
-    }
-
-    if (!sectionHeading.dataset.anchorId) {
-      sectionHeading.dataset.anchorId = sectionHeading.parentElement.id;
-    }
-  }
-};
-
-const updateAnchorIcons = () => {
-  for (const anchorLink of window.document.querySelectorAll("a.anchorjs-link")) {
-    anchorLink.textContent = anchorIcon;
   }
 };
 
@@ -692,18 +671,15 @@ const moveTheoremDivAnchorsInlineWithRetry = (
 if (window.document.readyState === "loading") {
   window.document.addEventListener("DOMContentLoaded", () => {
     addTheoremLikeDivAnchors();
-    addLevel1SectionAnchors();
     moveTheoremDivAnchorsInlineWithRetry();
   });
 } else {
   addTheoremLikeDivAnchors();
-  addLevel1SectionAnchors();
   moveTheoremDivAnchorsInlineWithRetry();
 }
 
 window.addEventListener("load", () => {
   moveTheoremDivAnchorsInlineWithRetry();
-  updateAnchorIcons();
 });
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
