@@ -235,12 +235,10 @@
 <p>You can include mathematical equations using LaTeX syntax:</p>
 <p>Inline equation: <span class="math inline">\(E = mc^2\)</span></p>
 <p>Display equation:</p>
-<div id="eq-gaussian-integral" class="equation-with-anchor">
-<p><span class="math display">\[
+<p><span id="eq-gaussian-integral"><span class="math display">\[
 \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
-\]</span> <a class="equation-anchor" href="#eq-gaussian-integral" aria-label="Link to equation eq-gaussian-integral">#</a></p>
-</div>
-<p>Direct link to the equation anchor: See <strong>?@eq-gaussian-integral</strong>.</p>
+\tag{1}\]</span></span></p>
+<p>Direct link to the equation anchor: See <a href="#/eq-gaussian-integral" class="quarto-xref">Equation&nbsp;1</a>.</p>
 </section></section>
 <section>
 <section id="tables" class="title-slide slide level1 center" data-number="2">
@@ -362,6 +360,35 @@ Table&nbsp;1: Example table caption
 
 </div>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const equations = document.querySelectorAll("span[id^='eq-']");
+  equations.forEach(function (equation) {
+    if (equation.querySelector(".equation-anchor")) {
+      return;
+    }
+
+    if (!equation.querySelector(".math.display")) {
+      return;
+    }
+
+    const id = equation.getAttribute("id");
+    if (!id) {
+      return;
+    }
+
+    equation.classList.add("equation-anchor-target");
+
+    const anchor = document.createElement("a");
+    anchor.className = "equation-anchor";
+    anchor.href = "#" + id;
+    anchor.setAttribute("aria-label", "Permalink to this equation");
+    anchor.textContent = "#";
+    equation.appendChild(anchor);
+  });
+});
+</script>
 
 </section></section>
     </div>
