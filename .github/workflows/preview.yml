@@ -67,7 +67,7 @@ jobs:
           fi
           files+=(chapters/*.qmd)
           if [ ${#files[@]} -eq 0 ]; then
-            echo "No QMD files found for RevealJS render; skipping."
+            echo "No QMD files found for Reveal.js render; skipping."
             exit 0
           fi
           quarto render "${files[@]}" --to revealjs
