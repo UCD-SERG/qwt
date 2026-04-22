@@ -23,12 +23,8 @@ function Para(el)
     return nil
   end
 
-  if #el.content == 0 then
-    return nil
-  end
-
   local first = el.content[1]
-  if first.t ~= "Math" or first.mathtype ~= "DisplayMath" then
+  if not first or first.t ~= "Math" or first.mathtype ~= "DisplayMath" then
     return nil
   end
 
