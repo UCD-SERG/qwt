@@ -57,11 +57,9 @@ jobs:
         with:
           to: html
 
-      - name: Render RevealJS
+      - name: Render RevealJS slides
         if: contains(github.event.pull_request.labels.*.name, 'revealjs')
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: revealjs
+        run: quarto render index.qmd chapters/*.qmd --to revealjs
 
       - name: Render PDF
         if: contains(github.event.pull_request.labels.*.name, 'pdf')
