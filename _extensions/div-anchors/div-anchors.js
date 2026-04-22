@@ -37,13 +37,48 @@ const addTheoremLikeDivAnchors = () => {
     if (!theoremDiv.dataset.anchorId) {
       theoremDiv.dataset.anchorId = theoremDiv.id;
     }
-
   }
 };
 
-if (window.document.readyState === "loading") {
-  window.document.addEventListener("DOMContentLoaded", addTheoremLikeDivAnchors);
-} else {
+const moveTheoremDivAnchorsInline = () => {
+  for (const theoremDiv of window.document.querySelectorAll("div[id]")) {
+    if (!isTheoremLikeDiv(theoremDiv)) {
+      continue;
+    }
+
+    const theoremTitle = theoremDiv.querySelector(".theorem-title");
+    if (!theoremTitle) {
+      continue;
+    }
+
+    const anchorLink = Array.from(
+      theoremDiv.querySelectorAll("a.anchorjs-link")
+    ).find((link) => {
+      const href = link.getAttribute("href") || "";
+      return href === `#${theoremDiv.id}` || href.endsWith(`#${theoremDiv.id}`);
+    });
+
+    if (!anchorLink || anchorLink.parentElement === theoremTitle) {
+      continue;
+    }
+
+    theoremTitle.append(" ");
+    theoremTitle.append(anchorLink);
+  }
+};
+
+const initializeTheoremDivAnchors = () => {
   addTheoremLikeDivAnchors();
+  window.requestAnimationFrame(() => {
+    moveTheoremDivAnchorsInline();
+  });
+};
+
+if (window.document.readyState === "loading") {
+  window.document.addEventListener("DOMContentLoaded", initializeTheoremDivAnchors);
+} else {
+  initializeTheoremDivAnchors();
 }
+
+window.addEventListener("load", moveTheoremDivAnchorsInline);
 </script>
