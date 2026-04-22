@@ -57,7 +57,7 @@ jobs:
         with:
           to: html
 
-      - name: Render RevealJS slides
+      - name: Render Reveal.js slides
         if: contains(github.event.pull_request.labels.*.name, 'revealjs')
         run: |
           shopt -s nullglob
@@ -65,8 +65,7 @@ jobs:
           if [ -f index.qmd ]; then
             files+=(index.qmd)
           fi
-          chapter_files=(chapters/*.qmd)
-          files+=("${chapter_files[@]}")
+          files+=(chapters/*.qmd)
           if [ ${#files[@]} -eq 0 ]; then
             echo "No QMD files found for RevealJS render; skipping."
             exit 0
