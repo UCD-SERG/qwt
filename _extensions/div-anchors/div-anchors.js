@@ -8,9 +8,9 @@ const theoremLikeClassPairs = [
   ["def", "definition"],
   ["exm", "example"],
   ["exr", "exercise"],
-  ["proof"],
-  ["remark"],
-  ["solution"]
+  ["proof", "proof"],
+  ["remark", "remark"],
+  ["solution", "solution"]
 ];
 
 const theoremLikeClasses = theoremLikeClassPairs.flat();
