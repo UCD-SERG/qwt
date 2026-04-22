@@ -2,14 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ucd-serg.github.io/qwt/index.html</loc>
-    <lastmod>2026-04-22T22:15:10.476Z</lastmod>
+    <lastmod>2026-04-22T22:24:09.706Z</lastmod>
   </url>
   <url>
     <loc>https://ucd-serg.github.io/qwt/chapters/chapter1.html</loc>
-    <lastmod>2026-04-22T22:15:10.476Z</lastmod>
+    <lastmod>2026-04-22T22:25:31.676Z</lastmod>
   </url>
   <url>
     <loc>https://ucd-serg.github.io/qwt/chapters/chapter2.html</loc>
-    <lastmod>2026-04-22T22:15:10.476Z</lastmod>
+    <lastmod>2026-04-22T22:25:31.676Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ucd-serg.github.io/qwt/index-slides.html</loc>
+    <lastmod>2026-04-22T22:24:09.706Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ucd-serg.github.io/qwt/chapters/chapter1-slides.html</loc>
+    <lastmod>2026-04-22T22:25:31.676Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ucd-serg.github.io/qwt/chapters/chapter2-slides.html</loc>
+    <lastmod>2026-04-22T22:25:31.676Z</lastmod>
   </url>
 </urlset>
