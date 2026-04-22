@@ -1,29 +1,28 @@
 <script>
-const theoremLikeClassPairs = [
-  ["thm", "theorem"],
-  ["lem", "lemma"],
-  ["cor", "corollary"],
-  ["prp", "proposition"],
-  ["cnj", "conjecture"],
-  ["def", "definition"],
-  ["exm", "example"],
-  ["exr", "exercise"],
-  ["proof", "proof"],
-  ["remark", "remark"],
-  ["solution", "solution"]
-];
-
-const theoremLikeClasses = theoremLikeClassPairs.flat();
-
-const isTheoremLikeClass = (className) =>
-  theoremLikeClasses.some(
-    (theoremLikeClass) =>
-      className === theoremLikeClass ||
-      className.startsWith(`${theoremLikeClass}-`)
-  );
+const theoremLikeClasses = new Set([
+  "thm",
+  "theorem",
+  "lem",
+  "lemma",
+  "cor",
+  "corollary",
+  "prp",
+  "proposition",
+  "cnj",
+  "conjecture",
+  "def",
+  "definition",
+  "exm",
+  "example",
+  "exr",
+  "exercise",
+  "proof",
+  "remark",
+  "solution"
+]);
 
 const isTheoremLikeDiv = (div) =>
-  Array.from(div.classList).some(isTheoremLikeClass);
+  Array.from(div.classList).some((className) => theoremLikeClasses.has(className));
 
 const addTheoremLikeDivAnchors = () => {
   for (const theoremDiv of window.document.querySelectorAll("div[id]")) {
@@ -39,20 +38,6 @@ const addTheoremLikeDivAnchors = () => {
       theoremDiv.dataset.anchorId = theoremDiv.id;
     }
 
-    const anchorTarget =
-      theoremDiv.querySelector(".theorem-title") ||
-      theoremDiv.querySelector("p:first-of-type");
-
-    if (!anchorTarget || anchorTarget.querySelector("a.anchorjs-link")) {
-      continue;
-    }
-
-    const anchorLink = window.document.createElement("a");
-    anchorLink.className = "anchorjs-link";
-    anchorLink.setAttribute("aria-label", "Anchor");
-    anchorLink.setAttribute("href", `#${theoremDiv.id}`);
-    anchorLink.textContent = "";
-    anchorTarget.appendChild(anchorLink);
   }
 };
 

@@ -25,10 +25,6 @@ local function class_is_theorem_like(class)
     if class == theorem_class then
       return true
     end
-
-    if class:sub(1, #theorem_class + 1) == theorem_class .. "-" then
-      return true
-    end
   end
 
   return false
