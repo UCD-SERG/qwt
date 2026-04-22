@@ -57,6 +57,25 @@ jobs:
         with:
           to: html
 
+      # Detect which chapters have changed and optionally disable highlighting
+      # based on the 'no-preview-highlights' PR label
+      - name: Detect changed chapters (based on rendered files)
+        run: python3 .github/scripts/detect-changed-chapters.py
+        env:
+          HTML_DIR: ./_site
+          # Set to 'true' if PR has 'no-preview-highlights' label
+          DISABLE_PREVIEW_HIGHLIGHTS: ${{ contains(github.event.pull_request.labels.*.name, 'no-preview-highlights') }}
+
+      - name: Inject preview metadata
+        if: env.PREVIEW_SHOW_HIGHLIGHTS == 'true'
+        run: python3 .github/scripts/inject-preview-metadata.py
+
+      - name: Re-render with metadata
+        if: env.PREVIEW_SHOW_HIGHLIGHTS == 'true'
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: html
+
       - name: Render Reveal.js slides
         if: contains(github.event.pull_request.labels.*.name, 'revealjs')
         run: |
@@ -119,25 +138,6 @@ jobs:
             echo "Rendering DOCX for $file"
             quarto render "$file" --to docx
           done
-
-      # Detect which chapters have changed and optionally disable highlighting
-      # based on the 'no-preview-highlights' PR label
-      - name: Detect changed chapters (based on rendered files)
-        run: python3 .github/scripts/detect-changed-chapters.py
-        env:
-          HTML_DIR: ./_site
-          # Set to 'true' if PR has 'no-preview-highlights' label
-          DISABLE_PREVIEW_HIGHLIGHTS: ${{ contains(github.event.pull_request.labels.*.name, 'no-preview-highlights') }}
-
-      - name: Inject preview metadata
-        if: env.PREVIEW_SHOW_HIGHLIGHTS == 'true'
-        run: python3 .github/scripts/inject-preview-metadata.py
-
-      - name: Re-render with metadata
-        if: env.PREVIEW_SHOW_HIGHLIGHTS == 'true'
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: html
 
       - name: Install python-docx for DOCX comparison
         if: contains(github.event.pull_request.labels.*.name, 'docx')
