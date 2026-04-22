@@ -209,13 +209,14 @@ body.quarto-dark code:not(pre > code) {
 }
 
 .equation-anchor-target {
+  --equation-anchor-offset: 1.2rem;
   position: relative;
   display: block;
 }
 
 .equation-anchor {
   position: absolute;
-  right: -1.2rem;
+  right: calc(-1 * var(--equation-anchor-offset));
   top: 50%;
   transform: translateY(-50%);
   text-decoration: none;
