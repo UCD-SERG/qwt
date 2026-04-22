@@ -43,7 +43,7 @@ const addTheoremLikeDivAnchors = () => {
   }
 };
 
-const addSectionHeadingAnchors = () => {
+const ensureSectionHeadingAnchorAttributes = () => {
   for (const sectionHeading of window.document.querySelectorAll(
     "section[id] > h1, section[id] > h2, section[id] > h3, section[id] > h4, section[id] > h5, section[id] > h6"
   )) {
@@ -108,12 +108,12 @@ const moveTheoremDivAnchorsInlineWithRetry = (
 if (window.document.readyState === "loading") {
   window.document.addEventListener("DOMContentLoaded", () => {
     addTheoremLikeDivAnchors();
-    addSectionHeadingAnchors();
+    ensureSectionHeadingAnchorAttributes();
     moveTheoremDivAnchorsInlineWithRetry();
   });
 } else {
   addTheoremLikeDivAnchors();
-  addSectionHeadingAnchors();
+  ensureSectionHeadingAnchorAttributes();
   moveTheoremDivAnchorsInlineWithRetry();
 }
 

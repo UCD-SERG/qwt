@@ -44,7 +44,7 @@ function alignEquationAnchorWithDefault(anchor, template) {
   }
 }
 
-function updateEquationAnchorsToDefaultGlyph() {
+function alignEquationAnchorsWithDefault() {
   const template = getDefaultAnchorTemplate();
   document.querySelectorAll("a.equation-anchor").forEach(function (anchor) {
     alignEquationAnchorWithDefault(anchor, template);
@@ -76,10 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
     equation.appendChild(anchor);
   });
 
-  updateEquationAnchorsToDefaultGlyph();
+  alignEquationAnchorsWithDefault();
 });
 
-window.addEventListener("load", updateEquationAnchorsToDefaultGlyph);
+window.addEventListener("load", alignEquationAnchorsWithDefault);
 </script>
 ]]
 end
