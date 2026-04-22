@@ -389,7 +389,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last modified: 2026-04-22 22:24:40 (UTC)</p>
+      <p class="date">Last modified: 2026-04-22 22:28:55 (UTC)</p>
     </div>
   </div>
   
@@ -554,9 +554,7 @@ const addLevel1SectionAnchors = () => {
 
 const updateAnchorIcons = () => {
   for (const anchorLink of window.document.querySelectorAll("a.anchorjs-link")) {
-    if (anchorLink.textContent !== anchorIcon) {
-      anchorLink.textContent = anchorIcon;
-    }
+    anchorLink.textContent = anchorIcon;
   }
 };
 
@@ -612,13 +610,11 @@ if (window.document.readyState === "loading") {
     addTheoremLikeDivAnchors();
     addLevel1SectionAnchors();
     moveTheoremDivAnchorsInlineWithRetry();
-    updateAnchorIcons();
   });
 } else {
   addTheoremLikeDivAnchors();
   addLevel1SectionAnchors();
   moveTheoremDivAnchorsInlineWithRetry();
-  updateAnchorIcons();
 }
 
 window.addEventListener("load", () => {
