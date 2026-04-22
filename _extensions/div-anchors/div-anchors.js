@@ -42,6 +42,8 @@ const addTheoremLikeDivAnchors = () => {
 };
 
 const moveTheoremDivAnchorsInline = () => {
+  let hasPendingAnchors = false;
+
   for (const theoremDiv of window.document.querySelectorAll("div[id]")) {
     if (!isTheoremLikeDiv(theoremDiv)) {
       continue;
@@ -59,24 +61,42 @@ const moveTheoremDivAnchorsInline = () => {
       return href === `#${theoremDiv.id}` || href.endsWith(`#${theoremDiv.id}`);
     });
 
-    if (!anchorLink || anchorLink.parentElement === theoremTitle) {
+    if (anchorLink && anchorLink.parentElement === theoremTitle) {
+      continue;
+    }
+
+    if (!anchorLink) {
+      hasPendingAnchors = true;
       continue;
     }
 
     theoremTitle.append(inlineAnchorSeparator);
     theoremTitle.append(anchorLink);
   }
+
+  return hasPendingAnchors;
 };
 
-const initializeTheoremDivAnchors = () => {
-  addTheoremLikeDivAnchors();
+const moveTheoremDivAnchorsInlineWithRetry = (attemptsRemaining = 5) => {
+  const hasPendingAnchors = moveTheoremDivAnchorsInline();
+  if (hasPendingAnchors && attemptsRemaining > 0) {
+    window.setTimeout(() => {
+      moveTheoremDivAnchorsInlineWithRetry(attemptsRemaining - 1);
+    }, 50);
+  }
 };
 
 if (window.document.readyState === "loading") {
-  window.document.addEventListener("DOMContentLoaded", initializeTheoremDivAnchors);
+  window.document.addEventListener("DOMContentLoaded", () => {
+    addTheoremLikeDivAnchors();
+    moveTheoremDivAnchorsInlineWithRetry();
+  });
 } else {
-  initializeTheoremDivAnchors();
+  addTheoremLikeDivAnchors();
+  moveTheoremDivAnchorsInlineWithRetry();
 }
 
-window.addEventListener("load", moveTheoremDivAnchorsInline);
+window.addEventListener("load", () => {
+  moveTheoremDivAnchorsInlineWithRetry();
+});
 </script>
