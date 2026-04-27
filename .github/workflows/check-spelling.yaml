@@ -16,7 +16,7 @@ jobs:
     permissions:
       contents: read
     container:
-      image: rocker/verse:latest
+      image: rocker/verse:4.6
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
