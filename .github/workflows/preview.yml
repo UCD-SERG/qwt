@@ -46,6 +46,9 @@ jobs:
             any::rmarkdown
             any::tibble
 
+      - name: Set timezone to Pacific Time
+        run: echo "TZ=America/Los_Angeles" >> $GITHUB_ENV
+
       - name: Restore Quarto freezer
         if: ${{ !contains(github.event.pull_request.labels.*.name, 'clear-freezer') }}
         id: quarto-freezer-cache
