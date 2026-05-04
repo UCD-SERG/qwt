@@ -23,9 +23,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@HEAD
         with:
+          install-quarto: false
           extra-packages: |
-            any::pkgdown
-            any::rmarkdown
             any::bib2df
             any::httr
             any::jsonlite
