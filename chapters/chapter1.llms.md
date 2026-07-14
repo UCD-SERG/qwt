@@ -4,7 +4,7 @@ Code
 
 Published
 
-Last modified: 2026-06-23 20:21:09 (PDT)
+Last modified: 2026-07-14 09:27:28 (PDT)
 
 This is the first chapter of your website. Replace this content with your own.
 
@@ -35,7 +35,7 @@ hello_world()
 
 Or R code:
 
-``` downlit
+``` r
 # Example R code
 library(ggplot2)
 
@@ -56,7 +56,7 @@ You can also add theorem-style divs:
 
 I’m adding some new content here:
 
-``` downlit
+``` r
 1 + 1
 #> [1] 2
 ```
