@@ -27,11 +27,13 @@ on:
         required: true
         type: string
 
-# Serialize reviews per PR: a newer push cancels the in-progress review of
-# the now-stale diff so only the freshest review runs (and posts a comment).
-concurrency:
-  group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}
-  cancel-in-progress: true
+# NOTE: no top-level `concurrency:` block here. The reusable workflow's own
+# `claude-review` job already declares `concurrency: group:
+# claude-review-<pr-number>, cancel-in-progress: true` internally -- a
+# caller-level block with the same group name deadlocks the run ("Canceling
+# since a deadlock was detected for concurrency group ... between a top
+# level workflow and 'review / claude-review'"), so the per-PR dedup this
+# used to provide is already handled inside the called workflow.
 
 jobs:
   review:
