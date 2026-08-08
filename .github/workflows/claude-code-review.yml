@@ -38,7 +38,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write  # post review + inline comments
-      issues: read
+      issues: write
       id-token: write        # required by claude-code-action for the App-token exchange
       actions: read          # lets the reviewer read CI status
     uses: Morrison-Lab/gha/.github/workflows/claude-code-review.yml@v2
